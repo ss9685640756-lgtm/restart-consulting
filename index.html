@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RESTart — Гостеприимный консалтинг для ресторанов и баров</title>
+<meta name="description" content="RESTart — команда практиков ресторанного бизнеса. Запуск и перезапуск ресторанов, баров и отелей: концепция, финмодель, меню, обучение команды. 32 города, 9 стран, 170+ экспертов."/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="RESTart — Гостеприимный консалтинг"/>
+<meta property="og:description" content="Команда практиков ресторанного бизнеса. От концепции и финмодели до запуска кухни, бара и обучения персонала. 32 города, 9 стран, 170+ экспертов."/>
+<meta property="og:locale" content="ru_RU"/>
+<meta name="theme-color" content="#0a0908"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23111111' rx='40'/%3E%3Cpolyline points='72,42 52,42 52,158 72,158' stroke='%23c91c1c' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='128,42 148,42 148,158 128,158' stroke='%23e8c32a' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ctext x='100' y='122' text-anchor='middle' font-family='system-ui,Helvetica Neue,Arial,sans-serif' font-weight='900' font-size='56' fill='%23f0ece0'%3ER%3C/text%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400;700;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#0a0908;
+  --coal:#111110;
+  --graphite:#1a1918;
+  --red:#C91C1C;
+  --yellow:#E8C32A;
+  --cream:#F0ECE0;
+  --muted:#888070;
+  --faint:#2e2c28;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--black);
+  color:var(--cream);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+::-webkit-scrollbar{width:2px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--red);}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:24px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:all 0.4s;
+}
+nav.scrolled{
+  padding:16px 48px;
+  background:rgba(10,9,8,0.97);
+  border-bottom:1px solid var(--faint);
+  backdrop-filter:blur(12px);
+}
+.logo-nav{
+  display:flex;align-items:center;
+  text-decoration:none;
+  font-family:'Oswald',sans-serif;
+  font-size:26px;font-weight:600;
+  letter-spacing:0.04em;
+  gap:0;
+}
+.logo-nav .bl{color:var(--red);margin-right:3px;}
+.logo-nav .br{color:var(--yellow);margin-left:3px;}
+.logo-nav .rest{color:var(--cream);}
+.logo-nav .art{color:var(--yellow);font-weight:400;}
+.nav-right{display:flex;align-items:center;gap:40px;}
+nav ul{list-style:none;display:flex;gap:32px;}
+nav ul a{
+  color:var(--muted);text-decoration:none;
+  font-size:11px;letter-spacing:0.16em;text-transform:uppercase;
+  transition:color 0.3s;
+}
+nav ul a:hover{color:var(--cream);}
+.nav-cta{
+  border:1px solid var(--red);color:var(--cream);
+  padding:10px 22px;font-size:11px;letter-spacing:0.14em;
+  text-transform:uppercase;text-decoration:none;
+  transition:all 0.3s;white-space:nowrap;
+}
+.nav-cta:hover{background:var(--red);}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+.nav-burger span{width:24px;height:2px;background:var(--cream);display:block;transition:all 0.3s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 48px 72px;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 65% 30%, rgba(201,28,28,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 10% 90%, rgba(232,195,42,0.05) 0%, transparent 50%),
+    var(--black);
+}
+.hero-orb{
+  position:absolute;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,28,28,0.12) 0%,transparent 70%);
+  top:-80px;right:-80px;
+  animation:float 9s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translate(0,0);}50%{transform:translate(20px,-30px);}}
+.hero-content{position:relative;z-index:2;}
+.hero-eyebrow{
+  font-size:11px;letter-spacing:0.22em;color:var(--red);
+  text-transform:uppercase;margin-bottom:28px;
+  display:flex;align-items:center;gap:14px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--red);}
+h1.hero-title{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(68px,13vw,148px);
+  font-weight:700;
+  line-height:1.06;
+  letter-spacing:0.01em;
+  color:var(--cream);
+  margin-bottom:36px;
+  text-transform:uppercase;
+}
+h1.hero-title .ar{color:var(--red);}
+h1.hero-title .ay{color:var(--yellow);}
+.hero-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(17px,2vw,22px);
+  font-style:italic;font-weight:300;
+  color:var(--muted);line-height:1.55;
+  max-width:520px;margin-bottom:36px;
+}
+.hero-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;font-style:italic;
+  color:var(--muted);line-height:1.65;
+  border-left:1px solid var(--faint);
+  padding-left:20px;max-width:480px;
+  margin-bottom:52px;
+}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{
+  background:var(--red);color:var(--cream);
+  padding:15px 38px;font-size:11px;letter-spacing:0.16em;
+  text-transform:uppercase;border:none;cursor:pointer;
+  text-decoration:none;display:inline-block;
+  transition:all 0.3s;font-family:'Inter',sans-serif;
+}
+.btn-primary:hover{background:#a81515;}
+.btn-ghost{
+  color:var(--cream);padding:15px 38px;
+  font-size:11px;letter-spacing:0.16em;
+  text-transform:uppercase;border:1px solid var(--faint);
+  text-decoration:none;display:inline-block;
+  transition:all 0.3s;font-family:'Inter',sans-serif;
+}
+.btn-ghost:hover{border-color:var(--yellow);color:var(--yellow);}
+
+/* ── TRUST STRIP ── */
+.trust-strip{
+  display:flex;flex-wrap:wrap;gap:10px 28px;
+  margin-top:44px;padding-top:32px;
+  border-top:1px solid var(--faint);
+  max-width:640px;
+}
+.trust-item{
+  display:flex;align-items:center;gap:9px;
+  font-size:11px;letter-spacing:0.04em;color:var(--muted);
+}
+.trust-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--yellow);flex-shrink:0;}
+
+/* ── MARQUEE ── */
+.marquee-wrap{background:var(--red);padding:13px 0;overflow:hidden;white-space:nowrap;}
+.marquee-inner{display:inline-flex;animation:marquee 22s linear infinite;}
+.marquee-inner span{
+  font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(240,236,224,0.85);padding:0 36px;
+}
+.marquee-inner .dot{color:var(--yellow);padding:0 8px;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ── SECTION BASE ── */
+section{padding:100px 48px;}
+.sec-label{
+  font-size:10px;letter-spacing:0.22em;color:var(--muted);
+  text-transform:uppercase;margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.sec-label .bl{color:var(--red);}
+.sec-label .br{color:var(--yellow);}
+h2.sec-title{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(44px,7vw,88px);
+  font-weight:700;line-height:1.08;
+  letter-spacing:0.01em;text-transform:uppercase;
+  color:var(--cream);margin-bottom:52px;
+}
+h2.sec-title .hy{color:var(--yellow);}
+h2.sec-title .hr{color:var(--red);}
+
+/* ── ABOUT ── */
+#about{background:var(--coal);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.about-text p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(17px,1.6vw,21px);
+  line-height:1.7;color:var(--cream);
+  margin-bottom:22px;font-weight:300;
+}
+.about-text p strong{color:var(--yellow);font-weight:600;}
+.stats-col{display:flex;flex-direction:column;}
+.stat-row{
+  padding:22px 0;
+  border-bottom:1px solid var(--faint);
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:16px;
+}
+.stat-row:last-child{border-bottom:none;}
+.stat-num{
+  font-family:'Oswald',sans-serif;
+  font-size:54px;font-weight:700;
+  color:var(--yellow);line-height:1;
+  flex-shrink:0;
+}
+.stat-right{text-align:right;}
+.stat-label{font-size:11px;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;}
+.stat-sub{font-size:12px;color:var(--muted);line-height:1.4;}
+
+/* ── SERVICES ── */
+#services{background:var(--black);}
+.svc-intro{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(17px,1.6vw,20px);
+  color:var(--muted);line-height:1.6;
+  font-style:italic;max-width:560px;
+  margin-bottom:64px;
+}
+.svc-blocks{display:flex;flex-direction:column;gap:2px;}
+.svc-block{background:var(--coal);}
+.svc-block-head{
+  padding:28px 40px 20px;
+  border-bottom:2px solid var(--red);
+  display:flex;align-items:center;gap:20px;
+}
+.svc-block-head.yel{border-bottom-color:var(--yellow);}
+.svc-tag{
+  font-size:10px;letter-spacing:0.14em;text-transform:uppercase;
+  padding:5px 12px;flex-shrink:0;
+}
+.svc-tag.red{background:var(--red);color:var(--cream);}
+.svc-tag.yel{background:var(--yellow);color:var(--black);}
+.svc-head-text{}
+.svc-col-title{
+  font-family:'Oswald',sans-serif;
+  font-size:22px;font-weight:600;
+  letter-spacing:0.04em;color:var(--cream);
+}
+.svc-col-sub{font-size:12px;color:var(--muted);margin-top:3px;}
+.svc-list{list-style:none;padding:0;}
+.svc-list li{
+  display:flex;align-items:flex-start;gap:20px;
+  padding:17px 40px;border-bottom:1px solid var(--faint);
+  font-size:15px;color:var(--cream);line-height:1.45;
+  transition:all 0.3s;cursor:default;
+}
+.svc-list li:last-child{border-bottom:none;}
+.svc-list li:hover{color:var(--yellow);padding-left:52px;}
+.li-n{
+  font-family:'Oswald',sans-serif;font-size:13px;
+  color:var(--red);min-width:22px;margin-top:1px;flex-shrink:0;
+}
+.svc-block-head.yel ~ .svc-list .li-n{color:var(--yellow);}
+
+/* ── CASES ── */
+#cases{background:var(--graphite);}
+.cases-intro{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(17px,1.6vw,20px);
+  color:var(--muted);line-height:1.6;
+  font-style:italic;max-width:560px;
+  margin-bottom:56px;
+}
+.cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+.case-card{
+  background:var(--coal);
+  position:relative;overflow:hidden;
+  border-top:2px solid var(--faint);
+  transition:all 0.35s;
+}
+.case-card:hover{border-top-color:var(--red);background:var(--black);}
+.case-card:nth-child(even):hover{border-top-color:var(--yellow);}
+.case-photo{
+  position:relative;width:100%;aspect-ratio:4/3;
+  overflow:hidden;background:var(--black);
+}
+.case-photo img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(20%) contrast(1.05) brightness(0.92);
+  transition:transform 0.6s ease,filter 0.6s ease;
+}
+.case-card:hover .case-photo img{transform:scale(1.05);filter:grayscale(0%) contrast(1.05) brightness(1);}
+.case-photo::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,9,8,0) 45%,rgba(17,17,16,0.96) 96%);
+  pointer-events:none;
+}
+.case-body{padding:28px 36px 32px;position:relative;}
+.case-tag{
+  font-size:10px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--red);margin-bottom:14px;
+}
+.case-card:nth-child(even) .case-tag{color:var(--yellow);}
+.case-name{
+  font-family:'Oswald',sans-serif;font-size:26px;font-weight:600;
+  letter-spacing:0.02em;color:var(--cream);margin-bottom:6px;
+}
+.case-geo{font-size:12px;color:var(--muted);margin-bottom:18px;}
+.case-desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:22px;}
+.case-stats{display:flex;gap:22px;margin-bottom:22px;flex-wrap:wrap;}
+.case-stat{display:flex;flex-direction:column;}
+.case-stat-num{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;color:var(--yellow);}
+.case-card:nth-child(odd) .case-stat-num{color:var(--red);}
+.case-stat-label{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+.case-what{list-style:none;margin-bottom:18px;}
+.case-what li{
+  font-size:12.5px;color:var(--cream);line-height:1.6;
+  padding-left:14px;position:relative;margin-bottom:4px;
+}
+.case-what li::before{content:'—';position:absolute;left:0;color:var(--muted);}
+.case-link{
+  font-size:11px;letter-spacing:0.08em;color:var(--muted);
+  text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+  transition:color 0.3s;
+}
+.case-link:hover{color:var(--yellow);}
+
+/* ── PROCESS ── */
+#process{background:var(--black);}
+.process-list{display:flex;flex-direction:column;gap:2px;margin-top:8px;}
+.process-item{
+  display:grid;grid-template-columns:80px 1fr;gap:0;
+  background:var(--coal);
+  border-left:3px solid transparent;
+  transition:all 0.35s;
+}
+.process-item:hover{border-left-color:var(--red);background:var(--graphite);}
+.process-item:nth-child(even):hover{border-left-color:var(--yellow);}
+.p-num{
+  font-family:'Oswald',sans-serif;font-size:13px;
+  letter-spacing:0.16em;color:var(--muted);
+  padding:28px 0 28px 32px;
+  display:flex;align-items:flex-start;
+}
+.p-body{padding:28px 36px 28px 0;}
+.p-title{
+  font-family:'Oswald',sans-serif;font-size:18px;
+  font-weight:600;letter-spacing:0.04em;
+  color:var(--red);margin-bottom:6px;
+}
+.process-item:nth-child(even) .p-title{color:var(--yellow);}
+.p-desc{font-size:13px;color:var(--muted);line-height:1.55;}
+
+/* ── FOR WHOM ── */
+#forwhom{background:var(--graphite);}
+.fw-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.fw-card{
+  padding:44px 32px;
+  background:var(--coal);
+  border-top:2px solid var(--faint);
+  transition:all 0.35s;
+  position:relative;overflow:hidden;
+}
+.fw-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--red);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s;
+}
+.fw-card:nth-child(even)::after{background:var(--yellow);}
+.fw-card:hover{border-top-color:var(--red);background:var(--black);}
+.fw-card:nth-child(even):hover{border-top-color:var(--yellow);}
+.fw-card:hover::after{transform:scaleX(1);}
+.fw-line{
+  width:32px;height:2px;
+  background:var(--red);
+  margin-bottom:22px;
+}
+.fw-card:nth-child(even) .fw-line{background:var(--yellow);}
+.fw-title{
+  font-family:'Oswald',sans-serif;
+  font-size:20px;font-weight:600;
+  letter-spacing:0.04em;
+  color:var(--cream);margin-bottom:12px;
+  text-transform:uppercase;
+}
+.fw-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ── WHY NOW ── */
+#whynow{background:var(--red);position:relative;overflow:hidden;}
+#whynow::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 70% at 80% 20%,rgba(0,0,0,0.35) 0%,transparent 60%);
+}
+#whynow .sec-label{color:rgba(240,236,224,0.5);}
+.whynow-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.whynow-title{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(52px,7vw,92px);
+  font-weight:700;line-height:1.08;
+  color:#fff;text-transform:uppercase;
+}
+.whynow-title .hy{color:var(--yellow);}
+.whynow-right p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(17px,1.6vw,21px);
+  line-height:1.65;color:#fff;
+  margin-bottom:22px;font-weight:300;
+}
+.whynow-right p strong{color:var(--yellow);}
+.why-points{display:flex;flex-direction:column;gap:2px;margin-top:8px;}
+.why-point{
+  padding:16px 22px;
+  background:rgba(0,0,0,0.18);
+  border-left:3px solid var(--yellow);
+  font-size:14px;color:#fff;line-height:1.5;
+}
+
+/* ── TEAM ── */
+#team{background:var(--black);}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.team-card{
+  padding:52px 44px;background:var(--coal);
+  position:relative;
+}
+.team-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+}
+.team-card:first-child::before{background:var(--red);}
+.team-card:last-child::before{background:var(--yellow);}
+.team-role{font-size:10px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:20px;}
+.team-name{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(32px,4vw,52px);
+  font-weight:700;letter-spacing:0.02em;
+  color:var(--cream);margin-bottom:12px;line-height:1;
+  text-transform:uppercase;
+}
+.team-geo{font-size:12px;color:var(--yellow);letter-spacing:0.1em;margin-bottom:22px;}
+.team-orgs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.team-org{
+  font-size:10px;letter-spacing:0.1em;
+  padding:5px 13px;border:1px solid var(--faint);
+  color:var(--muted);transition:all 0.3s;
+}
+.team-card:hover .team-org{color:var(--cream);}
+.team-contacts{display:flex;flex-direction:column;gap:10px;}
+.team-contact{
+  display:flex;align-items:center;gap:14px;
+  text-decoration:none;color:var(--cream);
+  font-size:15px;transition:color 0.3s;
+}
+.team-contact:hover{color:var(--yellow);}
+.c-icon{
+  width:30px;height:30px;background:var(--faint);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;flex-shrink:0;
+}
+
+/* ── FAQ ── */
+#faq{background:var(--graphite);}
+.faq-list{display:flex;flex-direction:column;gap:2px;margin-top:8px;}
+.faq-item{background:var(--coal);border-left:3px solid transparent;transition:border-color 0.3s;}
+.faq-item.open{border-left-color:var(--yellow);}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:26px 40px;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  font-family:'Oswald',sans-serif;font-size:16px;font-weight:500;
+  color:var(--cream);letter-spacing:0.01em;
+}
+.faq-q .plus{font-size:20px;color:var(--yellow);flex-shrink:0;transition:transform 0.3s;font-weight:300;}
+.faq-item.open .plus{transform:rotate(45deg);}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height 0.35s ease;
+}
+.faq-item.open .faq-a{max-height:240px;}
+.faq-a p{padding:0 40px 26px;font-size:13.5px;color:var(--muted);line-height:1.65;max-width:680px;}
+
+/* ── CTA ── */
+#cta{
+  background:var(--coal);text-align:center;
+  position:relative;overflow:hidden;
+}
+#cta::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 60% at 50% 50%,rgba(232,195,42,0.05) 0%,transparent 60%),
+    radial-gradient(ellipse 30% 30% at 15% 90%,rgba(201,28,28,0.07) 0%,transparent 50%);
+}
+.cta-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;}
+.cta-pre{font-size:11px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:28px;}
+.cta-title{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(48px,8vw,100px);
+  font-weight:700;line-height:1.08;
+  letter-spacing:0.01em;text-transform:uppercase;
+  color:var(--cream);margin-bottom:22px;
+}
+.cta-title .hr{color:var(--red);}
+.cta-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:19px;color:var(--muted);
+  line-height:1.6;font-style:italic;
+  max-width:560px;margin:0 auto 40px;
+}
+.cta-guarantee{
+  display:inline-flex;flex-wrap:wrap;justify-content:center;gap:10px 24px;
+  margin:0 auto 52px;padding:18px 28px;
+  border:1px solid var(--faint);
+  font-size:11.5px;color:var(--muted);
+}
+.cta-guarantee span{color:var(--yellow);}
+.cta-contacts{display:flex;justify-content:center;gap:56px;margin-bottom:48px;flex-wrap:wrap;}
+.cta-person-name{
+  font-family:'Oswald',sans-serif;font-size:20px;
+  font-weight:600;letter-spacing:0.06em;
+  color:var(--cream);margin-bottom:10px;
+  text-transform:uppercase;
+}
+.cta-person-btns{display:flex;flex-direction:column;gap:8px;align-items:stretch;}
+.cta-person-btn{
+  display:inline-block;text-decoration:none;text-align:center;
+  font-size:13px;letter-spacing:0.03em;
+  padding:12px 26px;border:1px solid var(--faint);
+  color:var(--cream);transition:all 0.3s;
+  font-family:'Inter',sans-serif;white-space:nowrap;
+}
+.cta-person-btn:hover{border-color:var(--yellow);color:var(--yellow);}
+.cta-person-btn--call{background:var(--red);border-color:var(--red);}
+.cta-person-btn--call:hover{background:#a81515;border-color:#a81515;color:var(--cream);}
+.cta-divider{width:1px;background:var(--faint);align-self:stretch;}
+.cta-lead-btn{display:inline-block;margin-bottom:20px;font-size:12px;padding:17px 42px;}
+.cta-or{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:36px;}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--black);
+  padding:36px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--faint);
+  flex-wrap:wrap;gap:12px;
+}
+.footer-logo{text-decoration:none;font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;display:flex;align-items:center;}
+.footer-logo .bl{color:var(--red);}
+.footer-logo .br{color:var(--yellow);}
+.footer-logo .rest{color:var(--cream);}
+.footer-logo .art{color:var(--yellow);font-weight:400;}
+footer p{font-size:11px;color:var(--muted);letter-spacing:0.08em;}
+footer .footer-links{display:flex;gap:18px;}
+footer .footer-links a{font-size:11px;color:var(--muted);letter-spacing:0.06em;text-decoration:none;transition:color 0.3s;}
+footer .footer-links a:hover{color:var(--yellow);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}.rd3{transition-delay:0.3s;}.rd4{transition-delay:0.4s;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  nav{padding:18px 20px;}
+  nav.scrolled{padding:14px 20px;}
+  nav ul{
+    position:fixed;top:0;right:0;height:100vh;width:78vw;max-width:320px;
+    background:rgba(10,9,8,0.98);backdrop-filter:blur(12px);
+    flex-direction:column;justify-content:center;align-items:flex-start;
+    gap:28px;padding:40px;transform:translateX(100%);transition:transform 0.4s ease;
+    display:flex;border-left:1px solid var(--faint);z-index:99;
+  }
+  nav ul.open{transform:translateX(0);}
+  nav ul a{font-size:14px;}
+  .nav-burger{display:flex;}
+  .nav-cta{display:none;}
+  section{padding:72px 20px;}
+  #hero{padding:0 20px 56px;}
+  .about-grid,.team-grid,.whynow-inner,.fw-grid,.cases-grid{grid-template-columns:1fr;}
+  .fw-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;gap:12px;text-align:center;padding:28px 20px;}
+  footer .footer-links{order:2;}
+  .cta-contacts{gap:32px;}
+  .cta-divider{display:none;}
+}
+@media(max-width:520px){
+  .fw-grid{grid-template-columns:1fr;}
+  h1.hero-title{font-size:clamp(38px,12vw,68px);}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="logo-nav">
+    <span class="bl">[</span><span class="rest">REST</span><span class="art">art</span><span class="br">]</span>
+  </a>
+  <div class="nav-right">
+    <ul id="navList">
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#cases">Кейсы</a></li>
+      <li><a href="#process">Процесс</a></li>
+      <li><a href="#faq">Вопросы</a></li>
+      <li><a href="#team">Команда</a></li>
+    </ul>
+    <a href="#cta" class="nav-cta">Обсудить проект</a>
+    <button class="nav-burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">Гостеприимный консалтинг · Москва</div>
+    <h1 class="hero-title reveal rd1">
+      ЗАПУСК.<br>
+      ПЕ<span class="ar">Р</span>ЕЗА<span class="ay">ПУСК</span>.<br>
+      РЕЗУЛЬТАТ.
+    </h1>
+    <p class="hero-sub reveal rd2">
+      Команда практиков ресторанного бизнеса.<br>
+      От концепции и финмодели до запуска кухни,<br>бара и обучения персонала.
+    </p>
+    <blockquote class="hero-quote reveal rd3">
+      «Чтобы стать настоящим экспертом, нужно 10 000 часов осознанной практики» — Малкольм Гладуэлл<br><br>
+      Около 10 лет жизни можно сэкономить, обратившись к профессионалам, прошедшим этот путь.
+    </blockquote>
+    <div class="hero-btns reveal rd4">
+      <a href="#cta" class="btn-primary">Обсудить проект</a>
+      <a href="#cases" class="btn-ghost">Наши кейсы</a>
+    </div>
+    <div class="trust-strip reveal rd4">
+      <div class="trust-item">32 города · 9 стран</div>
+      <div class="trust-item">170+ проверенных экспертов</div>
+      <div class="trust-item">Фиксированный договор и КП</div>
+      <div class="trust-item">Оплата 50/50 по этапам</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span>Запуск ресторана</span><span class="dot">✦</span>
+    <span>Перезапуск заведения</span><span class="dot">✦</span>
+    <span>Аудит концепции</span><span class="dot">✦</span>
+    <span>Финансовая модель</span><span class="dot">✦</span>
+    <span>Запуск кухни</span><span class="dot">✦</span>
+    <span>Запуск бара</span><span class="dot">✦</span>
+    <span>Подбор команды</span><span class="dot">✦</span>
+    <span>Обучение персонала</span><span class="dot">✦</span>
+    <span>Сопровождение открытия</span><span class="dot">✦</span>
+    <span>Запуск ресторана</span><span class="dot">✦</span>
+    <span>Перезапуск заведения</span><span class="dot">✦</span>
+    <span>Аудит концепции</span><span class="dot">✦</span>
+    <span>Финансовая модель</span><span class="dot">✦</span>
+    <span>Запуск кухни</span><span class="dot">✦</span>
+    <span>Запуск бара</span><span class="dot">✦</span>
+    <span>Подбор команды</span><span class="dot">✦</span>
+    <span>Обучение персонала</span><span class="dot">✦</span>
+    <span>Сопровождение открытия</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label reveal"><span class="bl">[</span>&nbsp;кто мы&nbsp;<span class="br">]</span></div>
+  <h2 class="sec-title reveal rd1">МЫ НЕ<br>СОВЕТУЕМ —<br>МЫ <span class="hy">ДЕЛАЕМ</span></h2>
+  <div class="about-grid">
+    <div class="about-text reveal rd2">
+      <p>RESTart — команда практиков ресторанного бизнеса с <strong>собственным опытом запусков, сопровождения и перезапуска проектов.</strong></p>
+      <p>За плечами — собственные открытия, работа с десятками заведений в разных странах, сильная насмотренность и понимание того, как должен работать проект <strong>не на бумаге, а в реальности.</strong></p>
+      <p>Заходим в проект, находим слабые места, собираем рабочее решение и доводим до результата. Не советуем — делаем.</p>
+      <p style="margin-top:8px;">Опыт: <strong>РФ · СНГ · ОАЭ · Кипр · Франция · США</strong></p>
+    </div>
+    <div class="stats-col reveal rd3">
+      <div class="stat-row">
+        <div class="stat-num"><span class="counter" data-target="9">0</span></div>
+        <div class="stat-right">
+          <span class="stat-label">Направлений работы</span>
+          <span class="stat-sub">От стройки до СММ-продвижения</span>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num"><span class="counter" data-target="170">0</span>+</div>
+        <div class="stat-right">
+          <span class="stat-label">Экспертов в сети</span>
+          <span class="stat-sub">Шефы, бартендеры, дизайнеры, технологи</span>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num"><span class="counter" data-target="32">0</span></div>
+        <div class="stat-right">
+          <span class="stat-label">Города</span>
+          <span class="stat-sub">Проекты в 32 городах и 9 странах</span>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num"><span class="counter" data-target="500">0</span>+</div>
+        <div class="stat-right">
+          <span class="stat-label">Дегустаций</span>
+          <span class="stat-sub">От разных шефов по всему миру</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-label reveal"><span class="bl">[</span>&nbsp;что предлагаем&nbsp;<span class="br">]</span></div>
+  <h2 class="sec-title reveal rd1">ОТ ТОЧЕЧНОГО<br>УСИЛЕНИЯ ДО<br><span class="hy">ЗАПУСКА</span> ПОД КЛЮЧ</h2>
+  <p class="svc-intro reveal rd2">Работаем частично по блокам или берём проект целиком — зависит от задачи и стадии готовности объекта.</p>
+  <div class="svc-blocks reveal rd3">
+    <div class="svc-block">
+      <div class="svc-block-head">
+        <span class="svc-tag red">Новый проект</span>
+        <div class="svc-head-text">
+          <div class="svc-col-title">Запуск с нуля</div>
+          <div class="svc-col-sub">Частично по блокам или запуск под ключ</div>
+        </div>
+      </div>
+      <ul class="svc-list">
+        <li><span class="li-n">01</span>Описание концепции и расчёт финансовой модели</li>
+        <li><span class="li-n">02</span>Создание дизайн-проекта и авторский надзор</li>
+        <li><span class="li-n">03</span>Брендинг и маркетинговый план запуска</li>
+        <li><span class="li-n">04</span>Запуск кухни — концепция, меню, технология, обучение</li>
+        <li><span class="li-n">05</span>Запуск бара — концепция, меню, технология, обучение</li>
+        <li><span class="li-n">06</span>Обучение персонала сервису</li>
+      </ul>
+    </div>
+    <div class="svc-block">
+      <div class="svc-block-head yel">
+        <span class="svc-tag yel">Действующее заведение</span>
+        <div class="svc-head-text">
+          <div class="svc-col-title">Перезапуск и усиление</div>
+          <div class="svc-col-sub">Обновление отдельных блоков или полный рестарт</div>
+        </div>
+      </div>
+      <ul class="svc-list">
+        <li><span class="li-n">·</span>Аудит концепции и финансовой модели</li>
+        <li><span class="li-n">·</span>Редизайн интерьера</li>
+        <li><span class="li-n">·</span>Обновление меню от московского шефа</li>
+        <li><span class="li-n">·</span>Обновление барной карты от модного бартендера</li>
+        <li><span class="li-n">·</span>Гастрольные ужины и барные смены</li>
+        <li><span class="li-n">·</span>Маркетинговый аудит и сопровождение</li>
+        <li><span class="li-n">·</span>СММ-продвижение</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section id="cases">
+  <div class="sec-label reveal"><span class="bl">[</span>&nbsp;реальные проекты&nbsp;<span class="br">]</span></div>
+  <h2 class="sec-title reveal rd1">НАШИ<br><span class="hy">КЕЙСЫ</span></h2>
+  <p class="cases-intro reveal rd2">Реальные проекты. Реальные результаты. От Пензы до Мумбаи и Торонто — 32 города, 9 стран.</p>
+  <div class="cases-grid reveal rd3">
+
+    <div class="case-card">
+      <div class="case-photo"><img src="images/case-krendelvil.jpg" alt="Кренделвиль — блюдо из меню" loading="lazy"></div>
+      <div class="case-body">
+      <div class="case-tag">Запуск под ключ · Кейс 01</div>
+      <div class="case-name">Кренделвиль</div>
+      <div class="case-geo">◎ Пенза · ресторан в ЖК</div>
+      <p class="case-desc">Ресторан в жилом комплексе — запуск кухни и бара с нуля. Домашняя русская кухня с профессиональным уровнем исполнения. Зашли брендшефом, собрали меню, обучили команду.</p>
+      <div class="case-stats">
+        <div class="case-stat"><span class="case-stat-num">45</span><span class="case-stat-label">блюд</span></div>
+        <div class="case-stat"><span class="case-stat-num">2</span><span class="case-stat-label">направления</span></div>
+        <div class="case-stat"><span class="case-stat-num">1</span><span class="case-stat-label">город</span></div>
+      </div>
+      <ul class="case-what">
+        <li>Разработка меню — русская кухня, 45 позиций</li>
+        <li>Запуск бара: алко, безалко, чай, кофе</li>
+        <li>Обучение персонала кухни и зала</li>
+        <li>Технологические карты на все позиции</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-photo"><img src="images/case-pasti-asti.jpg" alt="Pasti & Asti — вход в ресторан" loading="lazy"></div>
+      <div class="case-body">
+      <div class="case-tag">Запуск ресторана · Кейс 02</div>
+      <div class="case-name">Pasti & Asti</div>
+      <div class="case-geo">◎ Итальянский ресторан · Россия</div>
+      <p class="case-desc">Открытие итальянского бистро и бара. Аутентичная итальянская кухня с правильными вкусами и технологиями, адаптированными под российский рынок поставок.</p>
+      <div class="case-stats">
+        <div class="case-stat"><span class="case-stat-num">40+</span><span class="case-stat-label">блюд</span></div>
+        <div class="case-stat"><span class="case-stat-num">IT</span><span class="case-stat-label">кухня</span></div>
+        <div class="case-stat"><span class="case-stat-num">Bistro</span><span class="case-stat-label">формат</span></div>
+      </div>
+      <ul class="case-what">
+        <li>Разработка меню — итальянская кухня</li>
+        <li>Технологические карты и себестоимость</li>
+        <li>Подбор и обучение шеф-повара</li>
+        <li>Барная карта и коктейльное меню</li>
+      </ul>
+      <a class="case-link" href="https://instagram.com/pasti_asti" target="_blank" rel="noopener">↗ instagram.com/pasti_asti</a>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-photo"><img src="images/case-richy-richy.jpg" alt="Richy Richy — авторский коктейль" loading="lazy"></div>
+      <div class="case-body">
+      <div class="case-tag">Премиальный ресторан · Кейс 03</div>
+      <div class="case-name">Richy Richy</div>
+      <div class="case-geo">◎ Москва · премиум-сегмент</div>
+      <p class="case-desc">Открытие премиального ресторана в Москве. Работали как концепт-шеф — от гастрономической идеи до запуска кухни и коктейльной карты. Вошёл в список самых обсуждаемых открытий сезона.</p>
+      <div class="case-stats">
+        <div class="case-stat"><span class="case-stat-num">Premium</span><span class="case-stat-label">сегмент</span></div>
+        <div class="case-stat"><span class="case-stat-num">MSK</span><span class="case-stat-label">город</span></div>
+        <div class="case-stat"><span class="case-stat-num">TOP</span><span class="case-stat-label">рейтинг</span></div>
+      </div>
+      <ul class="case-what">
+        <li>Концепт-шеф: гастрономическая концепция</li>
+        <li>Формирование и обучение кухонной команды</li>
+        <li>Авторская коктейльная карта</li>
+        <li>Сопровождение первых месяцев работы</li>
+      </ul>
+      <a class="case-link" href="https://instagram.com/richy_richy_rest" target="_blank" rel="noopener">↗ instagram.com/richy_richy_rest</a>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-photo"><img src="images/case-noyaa.jpg" alt="NOYAA Bar — интерьер бара в Торонто" loading="lazy"></div>
+      <div class="case-body">
+      <div class="case-tag">Международный проект · Кейс 04</div>
+      <div class="case-name">NOYAA Bar</div>
+      <div class="case-geo">◎ Торонто · Канада</div>
+      <p class="case-desc">Открытие премиального бара в Торонто. Концепция, авторское коктейльное меню и стандарты сервиса для канадского рынка. Один из самых амбициозных международных запусков RESTart.</p>
+      <div class="case-stats">
+        <div class="case-stat"><span class="case-stat-num">CA</span><span class="case-stat-label">канада</span></div>
+        <div class="case-stat"><span class="case-stat-num">Bar</span><span class="case-stat-label">формат</span></div>
+        <div class="case-stat"><span class="case-stat-num">INT</span><span class="case-stat-label">рынок</span></div>
+      </div>
+      <ul class="case-what">
+        <li>Концепция и позиционирование бара</li>
+        <li>Разработка авторского коктейльного меню</li>
+        <li>Стандарты сервиса для международного рынка</li>
+        <li>Обучение барной команды</li>
+      </ul>
+      <a class="case-link" href="https://instagram.com/noyaatoronto" target="_blank" rel="noopener">↗ instagram.com/noyaatoronto</a>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-photo"><img src="images/case-bare.jpg" alt="BARE Bar — интерьер бара в Мумбаи" loading="lazy"></div>
+      <div class="case-body">
+      <div class="case-tag">Международный бар · Кейс 05</div>
+      <div class="case-name">BARE Bar</div>
+      <div class="case-geo">◎ Мумбаи · Индия</div>
+      <p class="case-desc">Открытие концептуального бара в Мумбаи. Авторская концепция, уникальная атмосфера и меню напитков с учётом индийского рынка и стандартов премиального сервиса.</p>
+      <div class="case-stats">
+        <div class="case-stat"><span class="case-stat-num">IN</span><span class="case-stat-label">индия</span></div>
+        <div class="case-stat"><span class="case-stat-num">Bar</span><span class="case-stat-label">формат</span></div>
+        <div class="case-stat"><span class="case-stat-num">INT</span><span class="case-stat-label">рынок</span></div>
+      </div>
+      <ul class="case-what">
+        <li>Концепция и позиционирование бара</li>
+        <li>Разработка коктейльного меню</li>
+        <li>Уникальная атмосфера и стандарты сервиса</li>
+        <li>Обучение барной команды</li>
+      </ul>
+      <a class="case-link" href="https://instagram.com/bare.bombay" target="_blank" rel="noopener">↗ instagram.com/bare.bombay</a>
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-body" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:100%;">
+      <div class="case-tag">Следующий кейс</div>
+      <div class="case-name" style="margin-bottom:16px;">Ваш проект</div>
+      <p class="case-desc">Первый шаг — бесплатная встреча с экспертом. Расскажите о своём проекте, мы предложим решение.</p>
+      <a href="#cta" class="btn-ghost" style="margin-top:8px;">Обсудить проект</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="sec-label reveal"><span class="bl">[</span>&nbsp;этапы взаимодействия&nbsp;<span class="br">]</span></div>
+  <h2 class="sec-title reveal rd1">КАК МЫ<br><span class="hy">РАБОТАЕМ</span></h2>
+  <div class="process-list">
+    <div class="process-item reveal">
+      <div class="p-num">ШАГ 01</div>
+      <div class="p-body"><div class="p-title">Вводный звонок</div><div class="p-desc">Вводный звонок с менеджером RESTart. Понимаем задачу и формат проекта.</div></div>
+    </div>
+    <div class="process-item reveal rd1">
+      <div class="p-num">ШАГ 02</div>
+      <div class="p-body"><div class="p-title">Встреча с экспертом</div><div class="p-desc">Бесплатная консультация и формирование запроса. Определяем, что нужно именно вам.</div></div>
+    </div>
+    <div class="process-item reveal rd2">
+      <div class="p-num">ШАГ 03</div>
+      <div class="p-body"><div class="p-title">Бриф</div><div class="p-desc">Заполнение брифа заказчиком. Фиксируем все детали и ожидания по проекту.</div></div>
+    </div>
+    <div class="process-item reveal rd3">
+      <div class="p-num">ШАГ 04</div>
+      <div class="p-body"><div class="p-title">Подготовка КП</div><div class="p-desc">Коммерческое предложение и согласование исполнителей под конкретную задачу.</div></div>
+    </div>
+    <div class="process-item reveal">
+      <div class="p-num">ШАГ 05</div>
+      <div class="p-body"><div class="p-title">Договор и предоплата</div><div class="p-desc">Финальное согласование, подписание договора и предоплата.</div></div>
+    </div>
+    <div class="process-item reveal rd1">
+      <div class="p-num">ШАГ 06</div>
+      <div class="p-body"><div class="p-title">Требования к площадке</div><div class="p-desc">Эксперты составляют перечень: оборудование, инвентарь, посуда, продукты.</div></div>
+    </div>
+    <div class="process-item reveal rd2">
+      <div class="p-num">ШАГ 07</div>
+      <div class="p-body"><div class="p-title">Выезд и реализация</div><div class="p-desc">Дегустации для заказчика и обучение персонала на месте.</div></div>
+    </div>
+    <div class="process-item reveal rd3">
+      <div class="p-num">ШАГ 08</div>
+      <div class="p-body"><div class="p-title">Технологические карты и закрытие</div><div class="p-desc">Написание ТК по итогам работы. Подписание акта и оплата второй части гонорара.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section id="forwhom">
+  <div class="sec-label reveal"><span class="bl">[</span>&nbsp;для кого&nbsp;<span class="br">]</span></div>
+  <h2 class="sec-title reveal rd1">РАБОТАЕМ<br>С <span class="hy">СЕРЬЁЗНЫМИ</span><br><span class="hr">ПРОЕКТАМИ</span></h2>
+  <div class="fw-grid">
+    <div class="fw-card reveal">
+      <div class="fw-line"></div>
+      <div class="fw-title">Собственники ресторанов</div>
+      <div class="fw-desc">Нужно усилить действующее заведение, перезапустить концепцию или поднять выручку.</div>
+    </div>
+    <div class="fw-card reveal rd1">
+      <div class="fw-line"></div>
+      <div class="fw-title">Инвесторы</div>
+      <div class="fw-desc">Планируете вложить деньги в ресторанный проект и хотите рабочую финмодель и сильную команду запуска.</div>
+    </div>
+    <div class="fw-card reveal rd2">
+      <div class="fw-line"></div>
+      <div class="fw-title">Девелоперы</div>
+      <div class="fw-desc">Нужен ресторанный оператор или консультант для F&B-составляющей объекта.</div>
+    </div>
+    <div class="fw-card reveal">
+      <div class="fw-line"></div>
+      <div class="fw-title">Гостиничные проекты</div>
+      <div class="fw-desc">Запуск или перезапуск ресторана, бара или банкетной службы при отеле.</div>
+    </div>
+    <div class="fw-card reveal rd1">
+      <div class="fw-line"></div>
+      <div class="fw-title">Управляющие</div>
+      <div class="fw-desc">Нужна внешняя экспертиза, сильный шеф или бартендер, аудит кухни или сервиса.</div>
+    </div>
+    <div class="fw-card reveal rd2">
+      <div class="fw-line"></div>
+      <div class="fw-title">Региональные проекты</div>
+      <div class="fw-desc">Хотите московский уровень кухни, бара и сервиса — привезём экспертов и сделаем.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section id="whynow">
+  <div class="sec-label reveal"><span style="color:rgba(240,236,224,0.4)">[</span>&nbsp;<span style="color:rgba(240,236,224,0.5);font-size:10px;letter-spacing:.22em;text-transform:uppercase;">почему сейчас</span>&nbsp;<span style="color:var(--yellow)">[</span></div>
+  <div class="whynow-inner">
+    <div class="whynow-title reveal rd1">
+      ЦЕНА<br>ОШИБКИ<br><span class="hy">ВЫСОКА</span>
+    </div>
+    <div class="whynow-right reveal rd2">
+      <p>Ресторанный бизнес переживает сложный период. <strong>Выживают те, кто делает правильно с первого раза.</strong></p>
+      <p>Слабая концепция, нерабочая экономика, неподготовленная команда — каждая из этих ошибок стоит миллионы и месяцы потерянного времени.</p>
+      <div class="why-points">
+        <div class="why-point">Сильная концепция, которая работает на рынке</div>
+        <div class="why-point">Рабочая финансовая модель с реальными цифрами</div>
+        <div class="why-point">Проверенные эксперты, а не случайные подрядчики</div>
+        <div class="why-point">Правильный запуск с первого раза — без дорогих переделок</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="sec-label reveal"><span class="bl">[</span>&nbsp;команда&nbsp;<span class="br">]</span></div>
+  <h2 class="sec-title reveal rd1">ЛЮДИ,<br>КОТОРЫЕ <span class="hy">ДЕЛАЮТ</span></h2>
+  <div class="team-grid">
+    <div class="team-card reveal rd2">
+      <div class="team-role">Основатель · Ресторанный консультант</div>
+      <div class="team-name">Никита Егоркин</div>
+      <div class="team-geo">РФ · СНГ · ОАЭ · Кипр · Франция</div>
+      <div class="team-orgs">
+        <span class="team-org">Novikov School</span>
+        <span class="team-org">Maison Dellos</span>
+        <span class="team-org">PIMS</span>
+      </div>
+    </div>
+    <div class="team-card reveal rd3">
+      <div class="team-role">Основатель · Ресторанный консультант</div>
+      <div class="team-name">Сос Степанян</div>
+      <div class="team-geo">РФ · СНГ · США</div>
+      <div class="team-orgs">
+        <span class="team-org">нетмонет</span>
+        <span class="team-org">GuestMe</span>
+        <span class="team-org">Fintech</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="sec-label reveal"><span class="bl">[</span>&nbsp;вопросы&nbsp;<span class="br">]</span></div>
+  <h2 class="sec-title reveal rd1">ЧТО ОБЫЧНО<br><span class="hy">СПРАШИВАЮТ</span></h2>
+  <div class="faq-list reveal rd2" id="faqList">
+    <div class="faq-item">
+      <button class="faq-q"><span>Работаете ли по частям, или только «под ключ»?</span><span class="plus">+</span></button>
+      <div class="faq-a"><p>По частям. Можно взять один блок — например, только меню и обучение кухни — или весь путь от концепции до открытия. Объём фиксируется в КП после брифа.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>Как устроена оплата?</span><span class="plus">+</span></button>
+      <div class="faq-a"><p>По договору, двумя частями: предоплата после согласования КП и подписания договора, остаток — после сдачи технологических карт и подписания акта выполненных работ.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>Работаете с регионами и за рубежом?</span><span class="plus">+</span></button>
+      <div class="faq-a"><p>Да. Проекты уже реализованы в 32 городах и 9 странах — от Пензы до Торонто и Мумбаи. Эксперты выезжают на площадку под задачу.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>Что если заведение уже открыто и просто «не идёт»?</span><span class="plus">+</span></button>
+      <div class="faq-a"><p>Это отдельный трек — аудит концепции и финмодели, редизайн, обновление меню и барной карты, СММ-сопровождение. Не обязательно закрываться на реконструкцию.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span>С чего начать?</span><span class="plus">+</span></button>
+      <div class="faq-a"><p>С бесплатной встречи с экспертом: разбираем задачу, формируем запрос и только после этого готовим коммерческое предложение — без обязательств на этом этапе.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="cta-pre reveal">Первый шаг — бесплатная встреча с экспертом</div>
+    <h2 class="cta-title reveal rd1">РАССКАЖИТЕ<br>О ВАШЕМ<br><span class="hr">ПРОЕКТЕ</span></h2>
+    <p class="cta-sub reveal rd2">
+      Не советы. Не консультации ради консультаций.<br>Рабочие решения под конкретную задачу.
+    </p>
+    <div class="cta-guarantee reveal rd2">
+      <div><span>✓</span> Фиксированный договор</div>
+      <div><span>✓</span> Оплата по этапам, не вперёд за всё</div>
+      <div><span>✓</span> Прозрачное КП до старта работ</div>
+    </div>
+    <a href="https://t.me/RESTartconsulting" target="_blank" class="btn-primary cta-lead-btn reveal rd3">Написать в Telegram: @RESTartconsulting</a>
+    <div class="cta-or reveal rd3">или свяжитесь с нами напрямую</div>
+    <div class="cta-contacts reveal rd4">
+      <div class="cta-person">
+        <div class="cta-person-name">Никита Егоркин</div>
+        <div class="cta-person-btns">
+          <a href="tel:+79855550822" class="cta-person-btn cta-person-btn--call">Позвонить · +7 985 555 08 22</a>
+          <a href="https://t.me/yegorkin" target="_blank" class="cta-person-btn">Telegram: @yegorkin</a>
+        </div>
+      </div>
+      <div class="cta-divider"></div>
+      <div class="cta-person">
+        <div class="cta-person-name">Сос Степанян</div>
+        <div class="cta-person-btns">
+          <a href="tel:+79775555272" class="cta-person-btn cta-person-btn--call">Позвонить · +7 977 555 52 72</a>
+          <a href="https://t.me/sos_stp" target="_blank" class="cta-person-btn">Telegram: @sos_stp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#hero" class="footer-logo">
+    <span class="bl">[</span><span class="rest">REST</span><span class="art">art</span><span class="br">]</span>
+  </a>
+  <div class="footer-links">
+    <a href="#cases">Кейсы</a>
+    <a href="#faq">Вопросы</a>
+    <a href="#cta">Контакты</a>
+  </div>
+  <p>Гостеприимный консалтинг · Москва</p>
+  <p id="footYear">© 2026 RESTart</p>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50));
+
+// Mobile burger menu
+const burger = document.getElementById('burger');
+const navList = document.getElementById('navList');
+burger.addEventListener('click',()=>{
+  burger.classList.toggle('open');
+  navList.classList.toggle('open');
+});
+navList.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  burger.classList.remove('open');navList.classList.remove('open');
+}));
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>{
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  });
+});
+
+// Reveal
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Counters
+function runCounter(el){
+  const t=+el.dataset.target,d=1600,s=performance.now();
+  (function u(now){
+    const p=Math.min((now-s)/d,1),ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(ease*t);
+    if(p<1)requestAnimationFrame(u);
+  })(s);
+}
+const cobs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){runCounter(e.target);cobs.unobserve(e.target);}});
+},{threshold:0.4});
+document.querySelectorAll('.counter').forEach(el=>cobs.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
+
+// Parallax orb
+window.addEventListener('scroll',()=>{
+  const y=scrollY;
+  const orb=document.querySelector('.hero-orb');
+  if(orb)orb.style.transform=`translate(${y*0.04}px,${-y*0.08}px)`;
+});
+
+// Dynamic footer year
+document.getElementById('footYear').textContent = `© ${new Date().getFullYear()} RESTart`;
+</script>
+</body>
+</html>
